@@ -35,11 +35,14 @@ class LaraMoneyHelper
      * @param string $currencyCode
      * @return Money
      */
-    public static function createMoney(?string $valueInCents, string $currencyCode = "BRL"): Money{
+    public static function createMoney(?string $valueInCents, string|Currency $currency = "BRL"): Money{
         if(is_null($valueInCents)){
             $valueInCents = 0;
         }
-        return new Money($valueInCents, new Currency($currencyCode));
+        if(is_string($currency)){
+            $currency = new Currency($currency);
+        }
+        return new Money($valueInCents, $currency);
     }
 
     /**
