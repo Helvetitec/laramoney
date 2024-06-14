@@ -1,5 +1,5 @@
 <?php
 
 return [
-    'default_currency' => '$',
+    'default_currency' => 'BRL',
 ];
