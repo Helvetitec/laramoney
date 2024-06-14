@@ -1,0 +1,30 @@
+{
+    "name": "helvetitec/laramoney",
+    "description": "PHPMoney implementation for Laravel",
+    "type": "library",
+    "autoload": {
+        "psr-4": {
+            "LaraMoney\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Roman Wanner",
+            "email": "60240491+daredloco@users.noreply.github.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "LaraMoney\\LaraMoneyServiceProvider"
+            ]
+        }
+    },
+    "require-dev": {
+        "orchestra/testbench": "^9"
+    },
+    "require": {
+        "livewire/livewire": "^3.0",
+        "moneyphp/money": "^4.5"
+    }
+}
