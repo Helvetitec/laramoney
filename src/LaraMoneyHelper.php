@@ -41,4 +41,15 @@ class LaraMoneyHelper
         }
         return new Money($valueInCents, new Currency($currencyCode));
     }
+
+    /**
+     * Creates a JSON array based on the Money object
+     *
+     * @param Money $money
+     * @return string
+     */
+    public static function toJSON(Money $money): string
+    {
+        return json_encode($money);
+    }
 }
