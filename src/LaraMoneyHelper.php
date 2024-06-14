@@ -31,11 +31,11 @@ class LaraMoneyHelper
     /**
      * Creates a money object based on value in cents and currency
      *
-     * @param ?integer $valueInCents
+     * @param ?string $valueInCents
      * @param string $currencyCode
      * @return Money
      */
-    public static function createMoney(?int $valueInCents, string $currencyCode = "BRL"): Money{
+    public static function createMoney(?string $valueInCents, string $currencyCode = "BRL"): Money{
         if(is_null($valueInCents)){
             $valueInCents = 0;
         }

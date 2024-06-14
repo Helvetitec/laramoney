@@ -5,6 +5,7 @@ namespace LaraMoney\Casts;
 use Illuminate\Contracts\Database\Eloquent\CastsAttributes;
 use Illuminate\Database\Eloquent\InvalidCastException;
 use Illuminate\Database\Eloquent\Model;
+use LaraMoney\LaraMoneyHelper;
 use Money\Currency;
 use Money\Money;
 
@@ -17,7 +18,11 @@ class LaraMoney implements CastsAttributes
      */
     public function get(Model $model, string $key, mixed $value, array $attributes): Money
     {
-        return new Money($value[0], new Currency($value[1]));
+        $json = json_decode($value, true);
+        return LaraMoneyHelper::createMoney(
+            $json["amount"],
+            new Currency($json["currency"])
+        );
     }
 
     /**
@@ -25,13 +30,10 @@ class LaraMoney implements CastsAttributes
      *
      * @param  array<string, mixed>  $attributes
      */
-    public function set(Model $model, string $key, mixed $value, array $attributes): array
+    public function set(Model $model, string $key, mixed $value, array $attributes): string
     {
         if($value instanceof Money){
-            return [
-                $value->getAmount(),
-                $value->getCurrency()->getCode()
-            ];
+            return json_encode($value);
         }
         throw new InvalidCastException($model, $key, $value);
     }
