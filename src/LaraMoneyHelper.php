@@ -2,11 +2,13 @@
 
 namespace LaraMoney;
 
+use Exception;
 use Illuminate\Support\Facades\App;
 use Money\Currencies\ISOCurrencies;
 use Money\Currency;
 use Money\Formatter\IntlMoneyFormatter;
 use Money\Money;
+use Money\MoneyParser;
 
 class LaraMoneyHelper
 {
@@ -54,5 +56,16 @@ class LaraMoneyHelper
     public static function toJSON(Money $money): string
     {
         return json_encode($money);
+    }
+
+    public static function parse(mixed $value): Money
+    {
+        if(is_array($value)){
+            return new Money($value["amount"], new Currency($value["currency"]));
+        }
+        if(is_numeric($value)){
+            return new Money($value, config('laramoney.default_currency', 'BRL'));
+        }
+        throw new Exception("Can't parse value ".$value." only arrays and numeric values are supported");
     }
 }
