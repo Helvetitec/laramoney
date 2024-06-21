@@ -5,7 +5,6 @@ namespace LaraMoney\Casts;
 use Exception;
 use Illuminate\Contracts\Database\Eloquent\CastsAttributes;
 use Illuminate\Database\Eloquent\Model;
-use LaraMoney\LaraMoney;
 use LaraMoney\LaraMoneyHelper;
 use Money\Currency;
 use Money\Money;
@@ -17,10 +16,10 @@ class LaraMoneyCast implements CastsAttributes
      *
      * @param  array<string, mixed>  $attributes
      */
-    public function get(Model $model, string $key, mixed $value, array $attributes): LaraMoney
+    public function get(Model $model, string $key, mixed $value, array $attributes): Money
     {
         $json = json_decode($value, true);
-        return new LaraMoney($json["amount"], new Currency($json["currency"]));
+        return new Money($json["amount"], new Currency($json["currency"]));
     }
 
     /**
@@ -36,10 +35,7 @@ class LaraMoneyCast implements CastsAttributes
         if(is_numeric($value)){
             $value = LaraMoneyHelper::createMoney($value * (config('laramoney.values_in_cents', false) ? 1 : 100), config('laramoney.default_currency', 'BRL'));
         }
-        if($value instanceof Money){
-            $value = LaraMoney::convert($value);
-        }
-        if(!$value instanceof LaraMoney){
+        if(!$value instanceof Money){
             throw new Exception("Value is not an instance of Money\Money. => ".$value);
         }
         return json_encode($value);

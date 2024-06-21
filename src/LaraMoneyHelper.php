@@ -17,9 +17,8 @@ class LaraMoneyHelper
      * @param string|null $locale
      * @return string
      */
-    public static function moneyToString(LaraMoney $money, string $locale = null): string
+    public static function moneyToString(Money $money, string $locale = null): string
     {
-        $money = $money->getMoney(); //Convert laramoney to money
         if($locale == null){
             $locale = App::getLocale();
         }
@@ -36,23 +35,23 @@ class LaraMoneyHelper
      * @param string $currencyCode
      * @return Money
      */
-    public static function createMoney(?string $valueInCents, string|Currency $currency = "BRL"): LaraMoney{
+    public static function createMoney(?string $valueInCents, string|Currency $currency = "BRL"): Money{
         if(is_null($valueInCents)){
             $valueInCents = 0;
         }
         if(is_string($currency)){
             $currency = new Currency($currency);
         }
-        return new LaraMoney($valueInCents, $currency);
+        return new Money($valueInCents, $currency);
     }
 
     /**
      * Creates a JSON array based on the Money object
      *
-     * @param LaraMoney $money
+     * @param Money $money
      * @return string
      */
-    public static function toJSON(LaraMoney $money): string
+    public static function toJSON(Money $money): string
     {
         return json_encode($money);
     }

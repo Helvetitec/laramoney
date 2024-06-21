@@ -1052,22 +1052,23 @@
         },
         {
             "name": "helvetitec/money",
-            "version": "v4.5.0",
+            "version": "v4.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Helvetitec/money.git",
-                "reference": "aad839c4241d2acf9f898e044734939ce8b9bb2b"
+                "reference": "fa24ff588311ed6158d7b201bddce58b6887a4c0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Helvetitec/money/zipball/aad839c4241d2acf9f898e044734939ce8b9bb2b",
-                "reference": "aad839c4241d2acf9f898e044734939ce8b9bb2b",
+                "url": "https://api.github.com/repos/Helvetitec/money/zipball/fa24ff588311ed6158d7b201bddce58b6887a4c0",
+                "reference": "fa24ff588311ed6158d7b201bddce58b6887a4c0",
                 "shasum": ""
             },
             "require": {
                 "ext-bcmath": "*",
                 "ext-filter": "*",
                 "ext-json": "*",
+                "livewire/livewire": "^3.5",
                 "php": "~8.1.0 || ~8.2.0 || ~8.3.0"
             },
             "require-dev": {
@@ -1137,9 +1138,9 @@
                 "vo"
             ],
             "support": {
-                "source": "https://github.com/Helvetitec/money/tree/v4.5.0"
+                "source": "https://github.com/Helvetitec/money/tree/v4.5.1"
             },
-            "time": "2024-06-21T20:04:34+00:00"
+            "time": "2024-06-21T21:12:00+00:00"
         },
         {
             "name": "laravel/framework",
