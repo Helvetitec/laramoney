@@ -6,7 +6,7 @@ use Livewire\Wireable;
 use Money\Currency;
 use Money\Money;
 
-class WireMoney extends Money implements Wireable{
+class LaraMoney extends Money implements Wireable{
     public function __toString()
     {
         return LaraMoneyHelper::moneyToString($this);

@@ -5,21 +5,22 @@ namespace LaraMoney\Casts;
 use Exception;
 use Illuminate\Contracts\Database\Eloquent\CastsAttributes;
 use Illuminate\Database\Eloquent\Model;
+use LaraMoney\LaraMoney;
 use LaraMoney\LaraMoneyHelper;
 use Money\Currency;
 use Money\Money;
 
-class LaraMoney implements CastsAttributes
+class LaraMoneyCast implements CastsAttributes
 {
     /**
      * Cast the given value.
      *
      * @param  array<string, mixed>  $attributes
      */
-    public function get(Model $model, string $key, mixed $value, array $attributes): Money
+    public function get(Model $model, string $key, mixed $value, array $attributes): LaraMoney
     {
         $json = json_decode($value, true);
-        return new Money($json["amount"], new Currency($json["currency"]));
+        return new LaraMoney($json["amount"], new Currency($json["currency"]));
     }
 
     /**
