@@ -5,6 +5,7 @@ namespace LaraMoney\Casts;
 use Exception;
 use Illuminate\Contracts\Database\Eloquent\CastsAttributes;
 use Illuminate\Database\Eloquent\Model;
+use LaraMoney\LaraMoney as LaraMoneyLaraMoney;
 use LaraMoney\LaraMoneyHelper;
 use Money\Currency;
 use Money\Money;
@@ -16,7 +17,7 @@ class LaraMoney implements CastsAttributes
      *
      * @param  array<string, mixed>  $attributes
      */
-    public function get(Model $model, string $key, mixed $value, array $attributes): Money
+    public function get(Model $model, string $key, mixed $value, array $attributes): LaraMoneyLaraMoney
     {
         $json = json_decode($value, true);
         return new Money($json["amount"], new Currency($json["currency"]));
@@ -30,10 +31,10 @@ class LaraMoney implements CastsAttributes
     public function set(Model $model, string $key, mixed $value, array $attributes): string
     {
         if(is_array($value)){
-            $value = LaraMoneyHelper::createMoney($value["amount"], $value["currency"]);
+            $value = LaraMoneyHelper::createMoney($value["amount"] * (config('laramoney.values_in_cents', false) ? 1 : 100), $value["currency"]);
         }
-        if(is_integer($value)){
-            $value = LaraMoneyHelper::createMoney($value, config('laramoney.default_currency', 'BRL'));
+        if(is_numeric($value)){
+            $value = LaraMoneyHelper::createMoney($value * (config('laramoney.values_in_cents', false) ? 1 : 100), config('laramoney.default_currency', 'BRL'));
         }
         if(!$value instanceof Money){
             throw new Exception("Value is not an instance of Money\Money. => ".$value);
