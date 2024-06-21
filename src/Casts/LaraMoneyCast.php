@@ -36,7 +36,10 @@ class LaraMoneyCast implements CastsAttributes
         if(is_numeric($value)){
             $value = LaraMoneyHelper::createMoney($value * (config('laramoney.values_in_cents', false) ? 1 : 100), config('laramoney.default_currency', 'BRL'));
         }
-        if(!$value instanceof Money){
+        if($value instanceof Money){
+            $value = LaraMoney::convert($value);
+        }
+        if(!$value instanceof LaraMoney){
             throw new Exception("Value is not an instance of Money\Money. => ".$value);
         }
         return json_encode($value);
