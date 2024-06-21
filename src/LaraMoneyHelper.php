@@ -4,6 +4,7 @@ namespace LaraMoney;
 
 use Exception;
 use Illuminate\Support\Facades\App;
+use LaraMoney\Exceptions\ParsingException;
 use Money\Currencies\ISOCurrencies;
 use Money\Currency;
 use Money\Formatter\IntlMoneyFormatter;
@@ -58,14 +59,43 @@ class LaraMoneyHelper
         return json_encode($money);
     }
 
+    /**
+     * Parses a string or array to a Money object
+     *
+     * @param mixed $value Can be either of type Money, string or array
+     * @return Money
+     * @throws ParsingException if value can't be parsed 
+     */
     public static function parse(mixed $value): Money
     {
+        //IF $value is already of type Money, we can return it as is
+        if($value instanceof Money){
+            return $value;
+        }
+        //If $value is an array, we assume that it contains of an "amount" key and a "currency" key
         if(is_array($value)){
-            return new Money($value["amount"], new Currency($value["currency"]));
+            if(!array_key_exists("amount", $value) || !array_key_exists("currency", $value)){
+                throw new ParsingException("Can't parse value, as it is an array and the array is missing either the key amount or currency.");
+            }
+            $amount = $value["amount"];
+            if($value["currency"] instanceof Currency){
+                $currency = $value["currency"];
+            }elseif(is_string($value["currency"])){
+                $currency = new Currency($value["currency"]);
+            }else{
+                throw new ParsingException("Can't parse value, as the currency is neither a Currency object nor a string.");
+            }
+            try{
+                return new Money($amount, $currency);
+            }catch(Exception $ex){
+                throw new ParsingException($ex->getMessage());
+            }
         }
-        if(is_numeric($value)){
+        //If $value is something else, we try to parse it anyways which would most likely fail if its not a string or such
+        try{
             return new Money($value, config('laramoney.default_currency', 'BRL'));
+        }catch(Exception $ex){
+            throw new ParsingException($ex->getMessage());
         }
-        throw new Exception("Can't parse value ".$value." only arrays and numeric values are supported");
     }
 }
