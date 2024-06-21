@@ -19,6 +19,7 @@ class LaraMoneyHelper
      */
     public static function moneyToString(LaraMoney $money, string $locale = null): string
     {
+        $money = $money->getMoney(); //Convert laramoney to money
         if($locale == null){
             $locale = App::getLocale();
         }
