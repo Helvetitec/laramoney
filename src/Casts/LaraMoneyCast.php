@@ -16,7 +16,7 @@ class LaraMoneyCast implements CastsAttributes
      *
      * @param  array<string, mixed>  $attributes
      */
-    public function get(Model $model, string $key, mixed $value, array $attributes): Money
+    public function get(Model $model, string $key, mixed $value, array $attributes): ?Money
     {
         if(is_null($value)){
             return config('laramoney.casts_null', false) ? null : LaraMoneyHelper::createMoney(0, config('laramoney.default_currency', 'BRL'));
