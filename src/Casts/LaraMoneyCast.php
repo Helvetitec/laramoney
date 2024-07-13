@@ -18,6 +18,9 @@ class LaraMoneyCast implements CastsAttributes
      */
     public function get(Model $model, string $key, mixed $value, array $attributes): Money
     {
+        if(is_null($value)){
+            return config('laramoney.casts_null', false) ? null : LaraMoneyHelper::createMoney(0, config('laramoney.default_currency', 'BRL'));
+        }
         $json = json_decode($value, true);
         return new Money($json["amount"], new Currency($json["currency"]));
     }
