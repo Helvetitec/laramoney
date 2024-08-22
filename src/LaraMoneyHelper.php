@@ -31,8 +31,8 @@ class LaraMoneyHelper
         $moneyFormatter = new IntlMoneyFormatter($numberFormatter, $currencies);
         $sign = "";
         if($withSign){
-            if(!$money->isZero()){
-                $sign = $money->isPositive() ? "+" : "-";
+            if(!$money->isZero() && $money->isPositive()){
+                $sign = "+";
             }
         }
         return $sign.$moneyFormatter->format($money);
