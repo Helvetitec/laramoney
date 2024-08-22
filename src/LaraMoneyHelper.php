@@ -18,9 +18,10 @@ class LaraMoneyHelper
      *
      * @param Money $money
      * @param string|null $locale
+     * @param bool $withSign
      * @return string
      */
-    public static function moneyToString(Money $money, string $locale = null): string
+    public static function moneyToString(Money $money, string $locale = null, bool $withSign = false): string
     {
         if($locale == null){
             $locale = App::getLocale();
@@ -28,7 +29,13 @@ class LaraMoneyHelper
         $currencies = new ISOCurrencies();
         $numberFormatter = new \NumberFormatter($locale, \NumberFormatter::CURRENCY);
         $moneyFormatter = new IntlMoneyFormatter($numberFormatter, $currencies);
-        return $moneyFormatter->format($money);
+        $sign = "";
+        if($withSign){
+            if(!$money->isZero()){
+                $sign = $money->isPositive() ? "+" : "-";
+            }
+        }
+        return $sign.$moneyFormatter->format($money);
     }
 
     /**
