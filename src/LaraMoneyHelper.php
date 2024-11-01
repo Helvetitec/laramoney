@@ -70,6 +70,7 @@ class LaraMoneyHelper
      * Parses a string or array to a Money object
      *
      * @param mixed $value Can be either of type Money, string or array
+     * @param bool $convertNull If set to true, a NULL $value will be converted to int 0
      * @return Money
      * @throws ParsingException if value can't be parsed 
      */
