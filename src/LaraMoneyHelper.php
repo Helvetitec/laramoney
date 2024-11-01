@@ -73,7 +73,7 @@ class LaraMoneyHelper
      * @return Money
      * @throws ParsingException if value can't be parsed 
      */
-    public static function parse(mixed $value): Money
+    public static function parse(mixed $value, bool $convertNull = false): Money
     {
         //IF $value is already of type Money, we can return it as is
         if($value instanceof Money){
@@ -98,6 +98,13 @@ class LaraMoneyHelper
                 throw new ParsingException($ex->getMessage());
             }
         }
+        
+        //If $value is null and $convertNull is true, a new Money object is generated with the value 0
+        if($convertNull && is_null($value))
+        {
+            return new Money(0, config('laramoney.default_currency', 'BRL'));
+        }
+
         //If $value is something else, we try to parse it anyways which would most likely fail if its not a string or such
         try{
             return new Money($value, config('laramoney.default_currency', 'BRL'));
