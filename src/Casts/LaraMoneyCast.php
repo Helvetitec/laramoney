@@ -32,6 +32,9 @@ class LaraMoneyCast implements CastsAttributes
      */
     public function set(Model $model, string $key, mixed $value, array $attributes): string
     {
+        if(is_null($value)){
+            return null;
+        }
         if(is_array($value)){
             $value = LaraMoneyHelper::createMoney($value["amount"] * (config('laramoney.values_in_cents', false) ? 1 : 100), $value["currency"]);
         }
