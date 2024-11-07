@@ -9,7 +9,6 @@ use Money\Currencies\ISOCurrencies;
 use Money\Currency;
 use Money\Formatter\IntlMoneyFormatter;
 use Money\Money;
-use Money\MoneyParser;
 
 class LaraMoneyHelper
 {
@@ -112,5 +111,20 @@ class LaraMoneyHelper
         }catch(Exception $ex){
             throw new ParsingException($ex->getMessage());
         }
+    }
+
+    /**
+     * Converts a value in cents directly to a string
+     *
+     * @param integer $valueInCents
+     * @param string $currency
+     * @param string|null $locale
+     * @param boolean $withSign
+     * @return string
+     */
+    public static function centsToString(int $valueInCents, string|Currency $currency = "BRL", string $locale = null, bool $withSign = false): string
+    {
+        $money = static::createMoney($valueInCents, $currency);
+        return static::moneyToString($money, $locale, $withSign);
     }
 }
