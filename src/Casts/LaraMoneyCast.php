@@ -30,7 +30,7 @@ class LaraMoneyCast implements CastsAttributes
      *
      * @param  array<string, mixed>  $attributes
      */
-    public function set(Model $model, string $key, mixed $value, array $attributes): string
+    public function set(Model $model, string $key, mixed $value, array $attributes): string|null
     {
         if(is_null($value)){
             return null;
