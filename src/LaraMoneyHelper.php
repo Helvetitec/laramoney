@@ -102,12 +102,12 @@ class LaraMoneyHelper
         //If $value is null and $convertNull is true, a new Money object is generated with the value 0
         if($convertNull && is_null($value))
         {
-            return new Money(0, config('laramoney.default_currency', 'BRL'));
+            return new Money(0, new Currency(config('laramoney.default_currency', 'BRL')));
         }
 
         //If $value is something else, we try to parse it anyways which would most likely fail if its not a string or such
         try{
-            return new Money($value, config('laramoney.default_currency', 'BRL'));
+            return new Money($value, new Currency(config('laramoney.default_currency', 'BRL')));
         }catch(Exception $ex){
             throw new ParsingException($ex->getMessage());
         }
