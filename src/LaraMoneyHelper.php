@@ -127,4 +127,16 @@ class LaraMoneyHelper
         $money = static::createMoney($valueInCents, $currency);
         return static::moneyToString($money, $locale, $withSign);
     }
+
+    /**
+     * Returns a monetary value based on the percentage $percentage of $value. For example, if $value is USD 100 and $percentage is 10, the returned value would be USD 10
+     *
+     * @param Money $value
+     * @param integer $percentage
+     * @return Money
+     */
+    public static function getPercentage(Money $value, int $percentage): Money
+    {
+        return $value->multiply($percentage / 100);
+    }
 }
