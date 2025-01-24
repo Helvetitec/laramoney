@@ -1056,16 +1056,16 @@
         },
         {
             "name": "helvetitec/money",
-            "version": "v4.5.1",
+            "version": "v4.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Helvetitec/money.git",
-                "reference": "fa24ff588311ed6158d7b201bddce58b6887a4c0"
+                "reference": "c6f67e937654a1136b388223e611c77a4ad11c4f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Helvetitec/money/zipball/fa24ff588311ed6158d7b201bddce58b6887a4c0",
-                "reference": "fa24ff588311ed6158d7b201bddce58b6887a4c0",
+                "url": "https://api.github.com/repos/Helvetitec/money/zipball/c6f67e937654a1136b388223e611c77a4ad11c4f",
+                "reference": "c6f67e937654a1136b388223e611c77a4ad11c4f",
                 "shasum": ""
             },
             "require": {
@@ -1073,7 +1073,7 @@
                 "ext-filter": "*",
                 "ext-json": "*",
                 "livewire/livewire": "^3.5",
-                "php": "~8.1.0 || ~8.2.0 || ~8.3.0"
+                "php": "~8.1.0 || ~8.2.0 || ~8.3.0 || ~8.4.0"
             },
             "require-dev": {
                 "cache/taggable-cache": "^1.1.0",
@@ -1088,10 +1088,12 @@
                 "php-http/message": "^1.16.0",
                 "php-http/mock-client": "^1.6.0",
                 "phpbench/phpbench": "^1.2.5",
+                "phpstan/extension-installer": "^1.4",
+                "phpstan/phpstan": "^2.0",
+                "phpstan/phpstan-phpunit": "^2.0",
                 "phpunit/phpunit": "^10.5.9",
-                "psalm/plugin-phpunit": "^0.18.4",
                 "psr/cache": "^1.0.1 || ^2.0 || ^3.0",
-                "vimeo/psalm": "~5.20.0"
+                "ticketswap/phpstan-error-formatter": "^1.1"
             },
             "suggest": {
                 "ext-gmp": "Calculate without integer limits",
@@ -1142,9 +1144,9 @@
                 "vo"
             ],
             "support": {
-                "source": "https://github.com/Helvetitec/money/tree/v4.5.1"
+                "source": "https://github.com/Helvetitec/money/tree/v4.6.0"
             },
-            "time": "2024-06-21T21:12:00+00:00"
+            "time": "2025-01-24T13:25:11+00:00"
         },
         {
             "name": "laravel/framework",
