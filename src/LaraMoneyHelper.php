@@ -137,6 +137,6 @@ class LaraMoneyHelper
      */
     public static function getPercentage(Money $value, int $percentage): Money
     {
-        return $value->multiply($percentage / 100);
+        return $value->multiply($percentage)->divide(100);
     }
 }
