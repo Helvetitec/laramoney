@@ -38,13 +38,23 @@ class LaraMoneyHelper
     }
 
     /**
+     * Creates a money object sets the value to 0 and uses currency
+     *
+     * @param string $currency
+     * @return Money
+     */
+    public static function createEmpty(string|Currency $currency = "BRL"): Money{
+        return static::createMoney(0, $currency);
+    }
+
+    /**
      * Creates a money object based on value in cents and currency
      *
      * @param ?string $valueInCents
-     * @param string $currencyCode
+     * @param string $currency
      * @return Money
      */
-    public static function createMoney(?string $valueInCents, string|Currency $currency = "BRL"): Money{
+    public static function createMoney(?string $valueInCents = null, string|Currency $currency = "BRL"): Money{
         if(is_null($valueInCents)){
             $valueInCents = 0;
         }
