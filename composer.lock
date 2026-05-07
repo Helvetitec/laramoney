@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "29957b6f7bd62a133093f32a3d8ca8df",
+    "content-hash": "5aa0aa539fd21b846e33a0221f9adaed",
     "packages": [
         {
             "name": "brick/math",
@@ -1055,7 +1055,7 @@
         },
         {
             "name": "helvetitec/money",
-            "version": "v5.0.0",
+            "version": "v5.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Helvetitec/money.git",
@@ -1143,7 +1143,7 @@
                 "vo"
             ],
             "support": {
-                "source": "https://github.com/Helvetitec/money/tree/v5.0.0"
+                "source": "https://github.com/Helvetitec/money/tree/v5.0.1"
             },
             "time": "2026-05-07T20:39:27+00:00"
         },
