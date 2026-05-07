@@ -25,6 +25,6 @@
     },
     "require": {
         "livewire/livewire": "^3.0",
-        "helvetitec/money": "^4.5"
+        "helvetitec/money": "^5.0"
     }
 }

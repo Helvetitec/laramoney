@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "008db045af2925fac7cad909f94ede31",
+    "content-hash": "29957b6f7bd62a133093f32a3d8ca8df",
     "packages": [
         {
             "name": "brick/math",
@@ -1055,16 +1055,16 @@
         },
         {
             "name": "helvetitec/money",
-            "version": "v4.6.2",
+            "version": "v5.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Helvetitec/money.git",
-                "reference": "3cf56427606e6c5e028861ae5db20d9274eaa5fe"
+                "reference": "78043114c1ef57d9ad5a4fd19c44212b18645d99"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Helvetitec/money/zipball/3cf56427606e6c5e028861ae5db20d9274eaa5fe",
-                "reference": "3cf56427606e6c5e028861ae5db20d9274eaa5fe",
+                "url": "https://api.github.com/repos/Helvetitec/money/zipball/78043114c1ef57d9ad5a4fd19c44212b18645d99",
+                "reference": "78043114c1ef57d9ad5a4fd19c44212b18645d99",
                 "shasum": ""
             },
             "require": {
@@ -1072,7 +1072,7 @@
                 "ext-filter": "*",
                 "ext-json": "*",
                 "livewire/livewire": "^3.5",
-                "php": "~8.1.0 || ~8.2.0 || ~8.3.0 || ~8.4.0"
+                "php": "~8.1.0 || ~8.2.0 || ~8.3.0 || ~8.4.0 || ~8.5.0"
             },
             "require-dev": {
                 "cache/taggable-cache": "^1.1.0",
@@ -1088,7 +1088,7 @@
                 "php-http/mock-client": "^1.6.0",
                 "phpbench/phpbench": "^1.2.5",
                 "phpstan/extension-installer": "^1.4",
-                "phpstan/phpstan": "^2.0",
+                "phpstan/phpstan": "^2.1.9",
                 "phpstan/phpstan-phpunit": "^2.0",
                 "phpunit/phpunit": "^10.5.9",
                 "psr/cache": "^1.0.1 || ^2.0 || ^3.0",
@@ -1143,9 +1143,9 @@
                 "vo"
             ],
             "support": {
-                "source": "https://github.com/Helvetitec/money/tree/v4.6.2"
+                "source": "https://github.com/Helvetitec/money/tree/v5.0.0"
             },
-            "time": "2025-01-27T21:04:26+00:00"
+            "time": "2026-05-07T20:39:27+00:00"
         },
         {
             "name": "laravel/framework",
