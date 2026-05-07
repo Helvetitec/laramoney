@@ -24,7 +24,7 @@
         "orchestra/testbench": "^9"
     },
     "require": {
-        "livewire/livewire": "^3.0",
+        "livewire/livewire": "^3.0|^4.0",
         "helvetitec/money": "^5.0"
     }
 }
