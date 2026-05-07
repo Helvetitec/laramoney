@@ -20,7 +20,7 @@ class LaraMoneyHelper
      * @param bool $withSign
      * @return string
      */
-    public static function moneyToString(Money $money, string $locale = null, bool $withSign = false): string
+    public static function moneyToString(Money $money, ?string $locale = null, bool $withSign = false): string
     {
         if($locale == null){
             $locale = App::getLocale();
@@ -132,7 +132,7 @@ class LaraMoneyHelper
      * @param boolean $withSign
      * @return string
      */
-    public static function centsToString(int $valueInCents, string|Currency $currency = "BRL", string $locale = null, bool $withSign = false): string
+    public static function centsToString(int $valueInCents, string|Currency $currency = "BRL", ?string $locale = null, bool $withSign = false): string
     {
         $money = static::createMoney($valueInCents, $currency);
         return static::moneyToString($money, $locale, $withSign);
