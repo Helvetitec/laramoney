@@ -5,6 +5,7 @@ namespace LaraMoney;
 use Exception;
 use Illuminate\Support\Facades\App;
 use LaraMoney\Exceptions\ParsingException;
+use LaraMoney\Facades\Money as FacadesMoney;
 use Money\Currencies\ISOCurrencies;
 use Money\Currency;
 use Money\Formatter\IntlMoneyFormatter;
@@ -15,13 +16,19 @@ class LaraMoney
     /**
      * Creates a string based on a money object and locale
      *
-     * @param Money $money
+     * @param ?Money $money
      * @param string|null $locale
      * @param bool $withSign
+     * @param bool $allowNull
      * @return string
      */
-    public function format(Money $money, ?string $locale = null, bool $withSign = false): string
+    public function format(?Money $money, ?string $locale = null, bool $withSign = false, bool $allowNull = true): string
     {
+        if(!$allowNull && is_null($money)){
+            throw new \LaraMoney\Exceptions\ParsingException("Can't format value because money is null but allowNull is false.");
+        }elseif($allowNull && is_null($money)){
+            $money = $this->zero(config('laramoney.default_currency', 'BRL'));
+        }
         if($locale == null){
             $locale = App::getLocale();
         }
@@ -35,6 +42,21 @@ class LaraMoney
             }
         }
         return $sign.$moneyFormatter->format($money);
+    }
+
+    /**
+     * Converts a value in cents directly to a string
+     *
+     * @param integer $valueInCents
+     * @param string $currency
+     * @param string|null $locale
+     * @param boolean $withSign
+     * @return string
+     */
+    public function formatCents(int $valueInCents, string|Currency $currency = "BRL", ?string $locale = null, bool $withSign = false): string
+    {
+        $money = $this->make($valueInCents, $currency);
+        return $this->format($money, $locale, $withSign);
     }
 
     /**
@@ -121,21 +143,6 @@ class LaraMoney
         }catch(Exception $ex){
             throw new ParsingException($ex->getMessage());
         }
-    }
-
-    /**
-     * Converts a value in cents directly to a string
-     *
-     * @param integer $valueInCents
-     * @param string $currency
-     * @param string|null $locale
-     * @param boolean $withSign
-     * @return string
-     */
-    public function formatCents(int $valueInCents, string|Currency $currency = "BRL", ?string $locale = null, bool $withSign = false): string
-    {
-        $money = $this->make($valueInCents, $currency);
-        return $this->format($money, $locale, $withSign);
     }
 
     /**
