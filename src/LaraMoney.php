@@ -5,7 +5,6 @@ namespace LaraMoney;
 use Exception;
 use Illuminate\Support\Facades\App;
 use LaraMoney\Exceptions\ParsingException;
-use LaraMoney\Facades\Money as FacadesMoney;
 use Money\Currencies\ISOCurrencies;
 use Money\Currency;
 use Money\Formatter\IntlMoneyFormatter;
