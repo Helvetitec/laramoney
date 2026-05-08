@@ -10,10 +10,7 @@ use Money\Currency;
 use Money\Formatter\IntlMoneyFormatter;
 use Money\Money;
 
-/**
- * @deprecated v1.5.0 - Use The \LaraMoney\Money facade instead
- */
-class LaraMoneyHelper
+class LaraMoney
 {
     /**
      * Creates a string based on a money object and locale
@@ -23,7 +20,7 @@ class LaraMoneyHelper
      * @param bool $withSign
      * @return string
      */
-    public static function moneyToString(Money $money, ?string $locale = null, bool $withSign = false): string
+    public function format(Money $money, ?string $locale = null, bool $withSign = false): string
     {
         if($locale == null){
             $locale = App::getLocale();
@@ -46,8 +43,8 @@ class LaraMoneyHelper
      * @param string $currency
      * @return Money
      */
-    public static function createEmpty(string|Currency $currency = "BRL"): Money{
-        return static::createMoney(0, $currency);
+    public function zero(string|Currency $currency = "BRL"): Money{
+        return $this->make(0, $currency);
     }
 
     /**
@@ -57,7 +54,7 @@ class LaraMoneyHelper
      * @param string $currency
      * @return Money
      */
-    public static function createMoney(?string $valueInCents = null, string|Currency $currency = "BRL"): Money{
+    public function make(?string $valueInCents = null, string|Currency $currency = "BRL"): Money{
         if(is_null($valueInCents)){
             $valueInCents = 0;
         }
@@ -73,7 +70,7 @@ class LaraMoneyHelper
      * @param Money $money
      * @return string
      */
-    public static function toJSON(Money $money): string
+    public function toJson(Money $money): string
     {
         return json_encode($money);
     }
@@ -86,7 +83,7 @@ class LaraMoneyHelper
      * @return Money
      * @throws ParsingException if value can't be parsed 
      */
-    public static function parse(mixed $value, bool $convertNull = false): Money
+    public function parse(mixed $value, bool $convertNull = false): Money
     {
         //IF $value is already of type Money, we can return it as is
         if($value instanceof Money){
@@ -135,10 +132,10 @@ class LaraMoneyHelper
      * @param boolean $withSign
      * @return string
      */
-    public static function centsToString(int $valueInCents, string|Currency $currency = "BRL", ?string $locale = null, bool $withSign = false): string
+    public function formatCents(int $valueInCents, string|Currency $currency = "BRL", ?string $locale = null, bool $withSign = false): string
     {
-        $money = static::createMoney($valueInCents, $currency);
-        return static::moneyToString($money, $locale, $withSign);
+        $money = $this->make($valueInCents, $currency);
+        return $this->format($money, $locale, $withSign);
     }
 
     /**
@@ -148,7 +145,7 @@ class LaraMoneyHelper
      * @param integer $percentage
      * @return Money
      */
-    public static function getPercentage(Money $value, int $percentage): Money
+    public function getPercentage(Money $value, int $percentage): Money
     {
         return $value->multiply($percentage)->divide(100);
     }

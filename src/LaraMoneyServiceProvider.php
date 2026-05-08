@@ -2,25 +2,25 @@
 
 namespace LaraMoney;
 
+use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\ServiceProvider;
-use Livewire\Livewire;
-use Illuminate\Support\Facades\Blade;
-use LiveControls\Masks\Http\Livewire\CepMask;
-use LiveControls\Masks\Http\Livewire\CnpjMask;
-use LiveControls\Masks\Http\Livewire\CpfCnpjMask;
-use LiveControls\Masks\Http\Livewire\CpfMask;
-use LiveControls\Masks\Http\Livewire\CurrencyMask;
-use LiveControls\Masks\Http\Livewire\CustomMask;
 
 class LaraMoneyServiceProvider extends ServiceProvider
 {
   public function register()
   { 
       $this->mergeConfigFrom(__DIR__.'/../config/config.php', 'laramoney');
+      $this->app->singleton('laramoney', function () {
+          return new LaraMoney();
+      });
   }
 
   public function boot()
   {
+      AliasLoader::getInstance()->alias(
+          'Money',
+          \LaraMoney\Facades\Money::class
+      );
       $this->publishes([
         __DIR__.'/../config/config.php' => config_path('laramoney.php'),
       ], 'laramoney.config');
