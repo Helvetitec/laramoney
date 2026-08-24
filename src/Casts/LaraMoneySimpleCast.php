@@ -40,10 +40,10 @@ class LaraMoneySimpleCast implements CastsAttributes
             ];
         }
         if(is_array($value)){
-            $value = FacadesMoney::make($value["amount"] * (config('laramoney.values_in_cents', false) ? 1 : 100), $value["currency"]);
+            $value = FacadesMoney::make((int) ($value["amount"] * (config('laramoney.values_in_cents', false) ? 1 : 100)), $value["currency"]);
         }
         if(is_numeric($value)){
-            $value = FacadesMoney::make($value * (config('laramoney.values_in_cents', false) ? 1 : 100), config('laramoney.default_currency', 'BRL'));
+            $value = FacadesMoney::make((int) ($value * (config('laramoney.values_in_cents', false) ? 1 : 100)), config('laramoney.default_currency', 'BRL'));
         }
         if(!$value instanceof Money){
             throw new Exception("Value is not an instance of Money\Money. => ".$value);
