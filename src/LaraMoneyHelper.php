@@ -22,6 +22,8 @@ class LaraMoneyHelper
      * @param string|null $locale
      * @param bool $withSign
      * @return string
+     * 
+     * @deprecated v1.5.0 - Use \LaraMoney\Money::format instead
      */
     public static function moneyToString(Money $money, ?string $locale = null, bool $withSign = false): string
     {
@@ -45,6 +47,8 @@ class LaraMoneyHelper
      *
      * @param string $currency
      * @return Money
+     * 
+     * @deprecated v1.5.0 - Use \LaraMoney\Money::zero instead
      */
     public static function createEmpty(string|Currency $currency = "BRL"): Money{
         return static::createMoney(0, $currency);
@@ -56,6 +60,8 @@ class LaraMoneyHelper
      * @param ?string $valueInCents
      * @param string $currency
      * @return Money
+     * 
+     * @deprecated v1.5.0 - Use \LaraMoney\Money::make instead
      */
     public static function createMoney(?string $valueInCents = null, string|Currency $currency = "BRL"): Money{
         if(is_null($valueInCents)){
@@ -72,6 +78,8 @@ class LaraMoneyHelper
      *
      * @param Money $money
      * @return string
+     * 
+     * @deprecated v1.5.0 - Use \LaraMoney\Money::toJson instead
      */
     public static function toJSON(Money $money): string
     {
@@ -85,6 +93,8 @@ class LaraMoneyHelper
      * @param bool $convertNull If set to true, a NULL $value will be converted to int 0
      * @return Money
      * @throws ParsingException if value can't be parsed 
+     * 
+     * @deprecated v1.5.0 - Use \LaraMoney\Money::parse instead
      */
     public static function parse(mixed $value, bool $convertNull = false): Money
     {
@@ -134,6 +144,8 @@ class LaraMoneyHelper
      * @param string|null $locale
      * @param boolean $withSign
      * @return string
+     * 
+     * @deprecated v1.5.0 - Use \LaraMoney\Money::formatCents instead
      */
     public static function centsToString(int $valueInCents, string|Currency $currency = "BRL", ?string $locale = null, bool $withSign = false): string
     {
@@ -147,6 +159,8 @@ class LaraMoneyHelper
      * @param Money $value
      * @param integer $percentage
      * @return Money
+     * 
+     * @deprecated v1.5.0 - Use \LaraMoney\Money::getPercentage instead
      */
     public static function getPercentage(Money $value, int $percentage): Money
     {
