@@ -15,6 +15,7 @@ composer require helvetitec/laramoney
 ### LaraMoneyCast
 It's easy to store and receive data from the database with the LaraMoneyCast.
 The value can either be NULL, an array of ['amount', 'currency'], a numeric value or a \Money\Money object.
+**The database field needs to be a JSON (compatible) field.**
 
 Add to the Models cast:
 ```php
@@ -24,8 +25,9 @@ protected $casts = [
 ```
 
 ### LaraMoneySimpleCast
-The simple cast will store the value as an integer, not as a JSON object for easier sorting etc.
+The simple cast will store the value as a string, not as a JSON object for easier sorting etc.
 The value can either be NULL, an array of ['amount', 'currency'], a numeric value or a \Money\Money object.
+**The database field for price and currency needs to be a string.**
 
 Add to the Models cast:
 ```php
