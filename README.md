@@ -32,10 +32,10 @@ Add to the Models cast:
 
 protected $fillable = [
     'price',
-    'currency' //You will need to manually set the currency field if you want another currency than the default one currently
+    'currency' //This is the default field, but can be changed inside the config field 'model_currency_field'.
 ];
 
 protected $casts = [
-    'price' => LaraMoneySimpleCast::class,
+    'price' => LaraMoneySimpleCast::class, //Will automatically set the 'currency' field as well
 ];
 ```
