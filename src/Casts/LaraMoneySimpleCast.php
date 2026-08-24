@@ -18,10 +18,12 @@ class LaraMoneySimpleCast implements CastsAttributes
      */
     public function get(Model $model, string $key, mixed $value, array $attributes): ?Money
     {
-        if(is_null($value) || trim($value) == ''){
-            return config('laramoney.casts_null', false) ? null : FacadesMoney::make(0, config('laramoney.default_currency', 'BRL'));
+        $currency = $attributes[
+            config('laramoney.model_currency_field', 'currency')
+        ] ?? config('laramoney.default_currency', 'BRL');
+        if(is_null($value) || trim((string)$value) == ''){
+            return config('laramoney.casts_null', false) ? null : FacadesMoney::make(0, $currency);
         }
-        $currency = $model->currency ?? config('laramoney.default_currency', 'BRL');
         return new Money($value, new Currency($currency));
     }
 
@@ -30,10 +32,12 @@ class LaraMoneySimpleCast implements CastsAttributes
      *
      * @param  array<string, mixed>  $attributes
      */
-    public function set(Model $model, string $key, mixed $value, array $attributes): string|null
+    public function set(Model $model, string $key, mixed $value, array $attributes): array|null
     {
         if(is_null($value)){
-            return null;
+            return [
+                $key => null,
+            ];
         }
         if(is_array($value)){
             $value = FacadesMoney::make($value["amount"] * (config('laramoney.values_in_cents', false) ? 1 : 100), $value["currency"]);
@@ -44,6 +48,9 @@ class LaraMoneySimpleCast implements CastsAttributes
         if(!$value instanceof Money){
             throw new Exception("Value is not an instance of Money\Money. => ".$value);
         }
-        return $value->getAmount();
+        return [
+            $key => $value->getAmount(),
+            config('laramoney.model_currency_field', 'currency') => $value->getCurrency()->getCode(),
+        ];
     }
 }
