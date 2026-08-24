@@ -71,11 +71,11 @@ class LaraMoney
     /**
      * Creates a money object based on value in cents and currency
      *
-     * @param ?string $valueInCents
+     * @param string|int|null $valueInCents
      * @param string $currency
      * @return Money
      */
-    public function make(?string $valueInCents = null, string|Currency $currency = "BRL"): Money{
+    public function make(string|int|null $valueInCents = null, string|Currency $currency = "BRL"): Money{
         if(is_null($valueInCents)){
             $valueInCents = 0;
         }
@@ -99,12 +99,12 @@ class LaraMoney
     /**
      * Parses a string or array to a Money object
      *
-     * @param mixed $value Can be either of type Money, string or array
+     * @param Money|string|array $value Can be either of type Money, string or array
      * @param bool $convertNull If set to true, a NULL $value will be converted to int 0
      * @return Money
      * @throws ParsingException if value can't be parsed 
      */
-    public function parse(mixed $value, bool $convertNull = false): Money
+    public function parse(Money|string|array $value, bool $convertNull = false): Money
     {
         //IF $value is already of type Money, we can return it as is
         if($value instanceof Money){
