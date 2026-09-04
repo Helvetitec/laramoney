@@ -155,4 +155,18 @@ class LaraMoney
     {
         return $value->multiply($percentage)->divide(100);
     }
+
+    /**
+     * Returns a monetary value based on the difference between value1 and value2. If absolute is true, the absolute value will be returned.
+     *
+     * @param Money $value1
+     * @param Money $value2
+     * @param boolean $absolute
+     * @return Money
+     */
+    public function difference(Money $value1, Money $value2, bool $absolute): Money
+    {
+        $diff = $value1->subtract($value2);
+        return $absolute && $diff->isNegative() ? $diff->multiply(-1) : $diff;
+    }
 }

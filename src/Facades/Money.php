@@ -15,6 +15,7 @@ use Money\Currency;
  * @method static string toJson(Money $money)
  * @method static MoneyMoney parse(Money|string|array $value, bool $convertNull = false)
  * @method static MoneyMoney getPercentage(Money $value, int $percentage)
+ * @method static MoneyMoney difference(Money $value1, Money $value2, bool $absolute)
  * 
  * @see LaraMoney
  */
