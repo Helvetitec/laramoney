@@ -164,7 +164,7 @@ class LaraMoney
      * @param boolean $absolute
      * @return Money
      */
-    public function difference(Money $value1, Money $value2, bool $absolute): Money
+    public function difference(Money $value1, Money $value2, bool $absolute = false): Money
     {
         $diff = $value1->subtract($value2);
         return $absolute && $diff->isNegative() ? $diff->multiply(-1) : $diff;
